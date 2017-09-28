@@ -24,11 +24,6 @@ public class Formais {
         
         Tela tela = new Tela();
         tela.setVisible(true);
-
-        
-
-        
-        
         
     }
     

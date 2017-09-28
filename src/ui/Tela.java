@@ -155,6 +155,7 @@ public class Tela extends javax.swing.JFrame {
         // TODO add your handling code here:
         conjProd = new ConjuntoProd();
         
+        conjProd.setConjuntos(jTextField1.getText().split(","), jTextField2.getText().split(","));
         conjProd.setProd(jTextAreaP.getText().split("\n"));
         jTextAreaS.setText(conjProd.toString());
     }//GEN-LAST:event_jButton1ActionPerformed

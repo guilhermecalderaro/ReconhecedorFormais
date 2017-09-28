@@ -41,15 +41,33 @@ public class ConjuntoProd {
         }
     }
     
-    public void setConjuntos(String[] auxText){
-        for(String s: auxText){
-            
+    public void setConjuntos(String[] nTerm,String[] term){
+        for(String x: nTerm){
+            conjNterm.add(x);
+        }
+        
+        for(String y: term){
+            conjTerm.add(y);
         }
     }
 
     @Override
     public String toString() {
-        String text = "";
+        String text = "G = ({";
+        text += conjNterm.get(0);
+        if(conjNterm.size()>1){
+            for (int i = 1; i < conjNterm.size(); i++) {
+                text += "," + conjNterm.get(i);
+            }
+        }
+        
+        text += "}, {" +conjTerm.get(0);
+        if(conjTerm.size()>1){
+            for (int i = 1; i < conjTerm.size(); i++) {
+                text += "," + conjTerm.get(i);
+            }
+        }
+        text += "}, P, S)\n";
         
         for (Producao p :conjProd) {
             text += "" + p.nTerm + ":" + p.prod.get(0);
