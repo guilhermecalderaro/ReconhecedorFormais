@@ -13,8 +13,8 @@ import java.util.List;
  * @author m93492
  */
 public class Producao {
-    String nTerm;
-    List<String> prod;
+    String nTerm;             //Lado esquerdo
+    List<String> prod;        //Lado direito
 
     public Producao(String nTerm) {
       this.nTerm = nTerm;

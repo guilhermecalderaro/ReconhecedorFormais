@@ -53,7 +53,9 @@ public class Tela extends javax.swing.JFrame {
         jTextAreaP.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jTextAreaP.setRows(5);
         jTextAreaP.setText("S:a,b,c\nA:b,c,&");
+        jTextAreaP.setToolTipText("Ex.: S:a,bS,c  (Uma regra por linha)");
         jScrollPane1.setViewportView(jTextAreaP);
+        jTextAreaP.getAccessibleContext().setAccessibleDescription("");
 
         jButton1.setText("Reconhecer");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +67,7 @@ public class Tela extends javax.swing.JFrame {
         jTextAreaS.setEditable(false);
         jTextAreaS.setColumns(20);
         jTextAreaS.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        jTextAreaS.setLineWrap(true);
         jTextAreaS.setRows(5);
         jScrollPane2.setViewportView(jTextAreaS);
 
@@ -72,6 +75,7 @@ public class Tela extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jTextField1.setText("S,A,B");
+        jTextField1.setToolTipText("Ex.: S,A,B");
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField1FocusLost(evt);
@@ -86,7 +90,8 @@ public class Tela extends javax.swing.JFrame {
         jLabel2.setText("T - Conjunto finito de terminais:");
 
         jTextField2.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jTextField2.setText("a,b,c,&");
+        jTextField2.setText("a,b,c");
+        jTextField2.setToolTipText("Ex.: a,b,c");
 
         jLabel3.setText("S - Símbolo inicial da gramática:");
 
@@ -148,16 +153,23 @@ public class Tela extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTextField1.getAccessibleContext().setAccessibleName("Ex.: S,A,B");
+        jTextField1.getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         conjProd = new ConjuntoProd();
+        String aux = jTextField1.getText();
         
+        conjProd.setTermIni(aux.substring(0, 1));
         conjProd.setConjuntos(jTextField1.getText().split(","), jTextField2.getText().split(","));
         conjProd.setProd(jTextAreaP.getText().split("\n"));
-        jTextAreaS.setText(conjProd.toString());
+        jTextAreaS.setText(conjProd.toString() + conjProd.reconheceGramatica());
+        //conjProd.reconheceGramatica();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
