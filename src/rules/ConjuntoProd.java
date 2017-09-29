@@ -20,9 +20,11 @@ public class ConjuntoProd {
     
     
     
-    boolean temVazio = false;
-    boolean umNT = false;
-    boolean maiorQ2 = false;
+    boolean fTemVazio = false;
+    boolean fUmNT = true;
+    boolean fMaiorQ2 = false;
+    boolean fLeMaiorQLd = false;
+    int menorSentenca = 99;
 
     public ConjuntoProd() {
         this.conjProd = new LinkedList<>();
@@ -89,9 +91,10 @@ public class ConjuntoProd {
                 for (int i = 1; i < p.prod.size(); i++) {
                     text += "|" + p.prod.get(i);
                 }
+                text += "\n";
             }
-            text += "}\n";
         }
+        text += "}";
         
         return text;
     }
@@ -100,25 +103,27 @@ public class ConjuntoProd {
         String txt = "";
         
         for(Producao p : conjProd){
-           if(p.nTerm.length()==1){
-               umNT = true;
-               
+           if(p.nTerm.length()>1){
+               fUmNT = false;
            }
            
             for(String s : p.prod){
-                if(s.contains("&")) temVazio = true;
-                if(s.length()>2) maiorQ2 = true;
+                if(s.length()<menorSentenca) menorSentenca = s.length();
+                if(s.contains("&")) fTemVazio = true;
+                if(s.length()>2) fMaiorQ2 = true;
             }
+            
+            if(p.nTerm.length()>menorSentenca) ;
      
         }
         
-        if (umNT) txt += "\n* Tem só um não-terminal do lado esquerdo";
-        if (temVazio) txt += "\n* Contém vazio do lado direito";
-        if (maiorQ2) txt += "\n* Mais que dois simbolos do lado direito";
+        if (fUmNT) txt += "\n* Tem só um simbolo não-terminal do lado esquerdo";
+        if (fTemVazio) txt += "\n* Contém sentença vazia do lado direito";
+        if (fMaiorQ2) txt += "\n* Mais que dois simbolos do lado direito";
         
-        if (umNT && !maiorQ2)  txt += "\n!!! É uma Gramática Regular";
-        else if (umNT && !temVazio) txt += "\n!!! É uma Gramática Livre de Contexto";
-        else if (!umNT && !temVazio) txt += "\n!!! É uma Gramática Livre de Contexto";        
+        if (fUmNT && !fMaiorQ2)  txt += "\n!!! É uma Gramática Regular";
+        else if (fUmNT && !fTemVazio) txt += "\n!!! É uma Gramática Livre de Contexto";
+        else if (!fUmNT && !fTemVazio) txt += "\n!!! É uma Gramática Sensível ao Contexto";        
         else txt += "\n!!! É uma Gramática Irrestrita";
         
         
