@@ -7,6 +7,7 @@ package rules;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -17,6 +18,7 @@ public class ConjuntoProd {
     List<String> conjNterm;
     List<String> conjTerm;
     String termIni;
+    int tipoG;
     
     
     
@@ -62,6 +64,10 @@ public class ConjuntoProd {
         }
     }
 
+    public int getTipoG() {
+        return tipoG;
+    }
+    
     @Override
     public String toString() {
         String text = "G = ({";
@@ -121,15 +127,63 @@ public class ConjuntoProd {
         if (fTemVazio) txt += "\n* Contém sentença vazia do lado direito";
         if (fMaiorQ2) txt += "\n* Mais que dois simbolos do lado direito";
         
-        if (fUmNT && !fMaiorQ2)  txt += "\n!!! É uma Gramática Regular";
-        else if (fUmNT && !fTemVazio) txt += "\n!!! É uma Gramática Livre de Contexto";
-        else if (!fUmNT && !fTemVazio) txt += "\n!!! É uma Gramática Sensível ao Contexto";        
-        else txt += "\n!!! É uma Gramática Irrestrita";
+        if (fUmNT && !fMaiorQ2)  {
+            txt += "\n!!! É uma Gramática Regular";
+            this.tipoG = 3;
+        }
+        else if (fUmNT && !fTemVazio) {
+            txt += "\n!!! É uma Gramática Livre de Contexto";
+            this.tipoG = 2;
+        }
+        else if (!fUmNT && !fTemVazio) {
+            txt += "\n!!! É uma Gramática Sensível ao Contexto";
+            this.tipoG = 1;
+        }        
+        else {
+            txt += "\n!!! É uma Gramática Irrestrita";
+            this.tipoG = 0;
+        }
         
         
         return txt;
     }
-  
+    
+    public boolean validaGramatica(){
+        boolean f1 = false;
+        boolean f2 = true;
+        
+        for(Producao p : this.conjProd){
+            for(String s : this.conjNterm){
+                if(p.nTerm.contains(s)) f1 = true;
+            }
+            if(!f1) f2 = false;
+            f1 = false;
+        }
+        
+        return f2;    
+    }
+    
+    public String geraPalavra(){
+        String palavra = this.termIni;
+        String txt = "\n" + palavra;
+        
+        Random rand = new Random();
+        // rand.nextInt(10)+1
+        
+        for (int i = 0; i < rand.nextInt(5); i++) {
+            for(Producao p : this.conjProd){
+                
+                if(palavra.contains(p.nTerm)){
+                    
+                    palavra = palavra.substring(0, palavra.length()-1) + p.prod.get(rand.nextInt(p.prod.size()));
+                    
+                    txt += "-> " + palavra;
+                   
+                }                
+            }            
+        }        
+        return txt;
+    }  
 
     
 }
