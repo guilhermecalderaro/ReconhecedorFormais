@@ -14,19 +14,19 @@ import java.util.Random;
  * @author m93492
  */
 public class ConjuntoProd {
-    List<Producao> conjProd;
-    List<String> conjNterm;
-    List<String> conjTerm;
-    String termIni;
-    int tipoG;
+    List<Producao> conjProd;// Conjunto de produções da gramatica
+    List<String> conjNterm; // Conjunto de não terminais
+    List<String> conjTerm;  // Conjunto de terminais
+    String termIni;         // Termo inicial
+    int tipoG;              // Tipo de gramatica
     
     
     
-    boolean fTemVazio = false;
-    boolean fUmNT = true;
-    boolean fMaiorQ2 = false;
-    boolean fLeMaiorQLd = false;
-    int menorSentenca = 99;
+    boolean fTemVazio = false;      // Produção tem sentença vazia
+    boolean fUmNT = true;           // Lado Esquerdo só tem um e somente um Não terminal
+    boolean fMaiorQ2 = false;       // Lado Direito tem mais de 2 simbolos 
+    boolean fLeMaiorQLd = false;    // Lado esquerdo maior que lado direito 
+    int menorSentenca = 99;         // Não foi usado
 
     public ConjuntoProd() {
         this.conjProd = new LinkedList<>();
@@ -35,20 +35,20 @@ public class ConjuntoProd {
     }
 
     public void setTermIni(String termIni) {
-        this.termIni = termIni;
+        this.termIni = termIni;     // Seta o termo inicial do conjunto
     }
         
     public void setProd(String[] auxText){
         
         for (int i = 0; i < auxText.length; i++) {
-            String[] auxProd = auxText[i].split(":");
-            
-            conjProd.add(new Producao(auxProd[0]));
-            
-            String[] auxSent = auxProd[1].split(",");
-            System.out.println(auxProd[1]);
-            for (int j = 0; j < auxSent.length ; j++) {
-                conjProd.get(i).addProd(auxSent[j]);
+            String[] auxProd = auxText[i].split(":");       // separa produção em Lado Esq e Dir
+                                                            // Ex.:     S : a,b
+            conjProd.add(new Producao(auxProd[0]));         // Cria um objeto Produção com a sentença
+                                                            // do lado Esquerdo Ex.: "S"
+            String[] auxSent = auxProd[1].split(",");       // separa o Lado Direro por virgula 
+            //System.out.println(auxProd[1]);
+            for (int j = 0; j < auxSent.length ; j++) {     // adiciona cada sentença do lado Dir
+                conjProd.get(i).addProd(auxSent[j]);        // na lista de derivação da sentença
                 //System.out.println(auxSent[j]);
             }
         }
@@ -65,11 +65,11 @@ public class ConjuntoProd {
     }
 
     public int getTipoG() {
-        return tipoG;
+        return tipoG;           //retorna tipo de gramatica
     }
     
     @Override
-    public String toString() {
+    public String toString() { // gera o G = ({}...) P->aa|bb
         String text = "G = ({";
         text += conjNterm.get(0);
         if(conjNterm.size()>1){
@@ -105,7 +105,8 @@ public class ConjuntoProd {
         return text;
     }
     
-    public String reconheceGramatica(){
+    public String reconheceGramatica(){ //faz todos os testes para reconhecer a gramatica
+                                        //seta todas a flags(variaveis booleanas)
         String txt = "";
         
         for(Producao p : conjProd){
@@ -148,7 +149,7 @@ public class ConjuntoProd {
         return txt;
     }
     
-    public boolean validaGramatica(){
+    public boolean validaGramatica(){ //não foi usado
         boolean f1 = false;
         boolean f2 = true;
         
@@ -163,7 +164,7 @@ public class ConjuntoProd {
         return f2;    
     }
     
-    public String geraPalavra(){
+    public String geraPalavra(){ //gera uma palavra aleatoria
         String palavra = this.termIni;
         String txt = "\n" + palavra;
         

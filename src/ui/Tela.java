@@ -207,7 +207,7 @@ public class Tela extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        jTextAreaS.append(this.conjProd.geraPalavra());
+        jTextAreaS.append(this.conjProd.geraPalavra()); // Cada linha gera uma palavra
         jTextAreaS.append(this.conjProd.geraPalavra());
         jTextAreaS.append(this.conjProd.geraPalavra());
         
