@@ -47,6 +47,7 @@ public class Tela extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Guilherme, Dionel, Roger e Yury");
 
         jLabel.setText("P - Conjunto finito de regras de produção:");
 
