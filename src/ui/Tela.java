@@ -53,7 +53,7 @@ public class Tela extends javax.swing.JFrame {
         jTextAreaP.setColumns(20);
         jTextAreaP.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jTextAreaP.setRows(5);
-        jTextAreaP.setText("S:a,b,c\nA:b,c,&");
+        jTextAreaP.setText("S:a,bA,cA\nA:bB,cB,&\nB:a,b,c\n");
         jTextAreaP.setToolTipText("Ex.: S:a,bS,c  (Uma regra por linha)");
         jScrollPane1.setViewportView(jTextAreaP);
         jTextAreaP.getAccessibleContext().setAccessibleDescription("");
@@ -128,7 +128,7 @@ public class Tela extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,6 +206,7 @@ public class Tela extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        jTextAreaS.append(this.conjProd.geraPalavra());
         jTextAreaS.append(this.conjProd.geraPalavra());
         jTextAreaS.append(this.conjProd.geraPalavra());
         

@@ -170,14 +170,15 @@ public class ConjuntoProd {
         Random rand = new Random();
         // rand.nextInt(10)+1
         
-        for (int i = 0; i < rand.nextInt(5); i++) {
+        //for (int i = 0; i < rand.nextInt(5); i++) {
+        for (int i = 0; i < 15; i++) {
             for(Producao p : this.conjProd){
                 
                 if(palavra.contains(p.nTerm)){
                     
                     palavra = palavra.substring(0, palavra.length()-1) + p.prod.get(rand.nextInt(p.prod.size()));
                     
-                    txt += "-> " + palavra;
+                    txt += " -> " + palavra;
                    
                 }                
             }            
